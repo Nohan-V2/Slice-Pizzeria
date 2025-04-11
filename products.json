@@ -1,0 +1,74 @@
+[
+    {
+        "id": "f515800c-e574-4edf-aef3-2872a532d6b8",
+        "name": "The Godfather Pizza",
+        "description": "Gourmet Italian sausage, fresh garlic, onions & our hot giardiniera.",
+        "price": 15,
+        "image": "https://www.dominos.fr/ManagedAssets/FR/product/P4FR/FR_P4FR_fr_menu_13347.png?v1701660714",
+        "category": {
+            "id": "c8755d47-4595-4768-9b0a-4cdc2fa92dd9",
+            "name": "pizza",
+            "description": "High qualities Pizza with organic ingredients and good vibes."
+        }
+    },
+    {
+        "id": "57fbec48-6f25-4b2e-998a-6d0d02666660",
+        "name": "The Veggie Pizza",
+        "description": "Vegetarian. Mushrooms, onions & green peppers with tomatoes on top.",
+        "price": 13,
+        "image": "https://www.dominos.fr/ManagedAssets/FR/product/PCAMP/FR_PCAMP_fr_menu_14474.png?v2089304946",
+        "category": {
+            "id": "c8755d47-4595-4768-9b0a-4cdc2fa92dd9",
+            "name": "pizza",
+            "description": "High qualities Pizza with organic ingredients and good vibes."
+        }
+    },
+    {
+        "id": "d87c4b30-9624-49e2-a3ce-10767b07a2e8",
+        "name": "Fabulous Four Pizza",
+        "description": "Gourmet Italian sausage, mushrooms, onions & green peppers.",
+        "price": 17,
+        "image": "https://www.dominos.fr/ManagedAssets/FR/product/PCHI2/FR_PCHI2_fr_menu_14474.png?v-1429196221",
+        "category": {
+            "id": "c8755d47-4595-4768-9b0a-4cdc2fa92dd9",
+            "name": "pizza",
+            "description": "High qualities Pizza with organic ingredients and good vibes."
+        }
+    },
+    {
+        "id": "50c25d1a-764d-4adf-b02b-c6249bb0ec28",
+        "name": "Meat Mania Pizza",
+        "description": "Gourmet Italian sausage, meatballs & pepperoni with turkey bacon on top.",
+        "price": 21,
+        "image": "https://www.dominos.fr/ManagedAssets/FR/product/PBCG/FR_PBCG_fr_menu_13347.png?v-1995365764",
+        "category": {
+            "id": "c8755d47-4595-4768-9b0a-4cdc2fa92dd9",
+            "name": "pizza",
+            "description": "High qualities Pizza with organic ingredients and good vibes."
+        }
+    },
+    {
+        "id": "8bd30f3b-e0ae-4a6b-9cb7-092b8923a0cb",
+        "name": "The Hawaiian Pizza",
+        "description": "A blend of our special pizza & BBQ sauces, topped with Australian bacon, and pineapple.",
+        "price": 17,
+        "image": "https://www.dominos.fr/ManagedAssets/FR/product/PSKE2/FR_PSKE2_fr_menu_14125.png?v-1448395228",
+        "category": {
+            "id": "c8755d47-4595-4768-9b0a-4cdc2fa92dd9",
+            "name": "pizza",
+            "description": "High qualities Pizza with organic ingredients and good vibes."
+        }
+    },
+    {
+        "id": "c47fec71-7d75-485b-a21a-07c72a263e73",
+        "name": "White Pizza",
+        "description": "Vegetarian. Olive oil, fresh garlic & sauteed spinach with tomatoes on top (no pizza sauce).",
+        "price": 15,
+        "image": "https://www.dominos.fr/ManagedAssets/FR/product/PPPA/FR_PPPA_fr_menu_13359.png?v1660664013",
+        "category": {
+            "id": "c8755d47-4595-4768-9b0a-4cdc2fa92dd9",
+            "name": "pizza",
+            "description": "High qualities Pizza with organic ingredients and good vibes."
+        }
+    }
+]

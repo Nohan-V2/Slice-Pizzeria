@@ -86,18 +86,18 @@ function decreasePizza(pizza) {
   console.log(productInBasket);
   console.log(pizza.id + "zzz ");
 
-  if (productInBasket === 1) {
-    productInBasket.quantity -= 1;
-  } else {
+  if (productInBasket.quantity === 1) {
     const index = arrayBasketPizza.indexOf(productInBasket);
     arrayBasketPizza.splice(index, 1);
+  } else {
+    productInBasket.quantity -= 1;
   }
 }
 
 function increaseBasket(pizza) {
   const productInBasket = arrayBasketPizza.find((item) => item.id === pizza.id);
   console.log(productInBasket);
-  if (productInBasket === 1) {
+  if (productInBasket) {
     productInBasket.quantity += 1;
   } else {
     const item = {
@@ -106,7 +106,6 @@ function increaseBasket(pizza) {
       price: pizza.price,
       quantity: 1,
     };
-
     arrayBasketPizza.push(item);
   }
 
@@ -116,7 +115,8 @@ function increaseBasket(pizza) {
 function displayPizza(pizza) {}
 
 async function fetchPizza() {
-  const response = await fetch("http://10.59.122.27:3000/products");
+  const response = await fetch("../products.json");
+  // const response = await fetch("http://10.59.122.27:3000/products");
   const data = await response.json();
   // console.log(data);
 
