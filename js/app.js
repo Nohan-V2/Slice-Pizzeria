@@ -9,6 +9,7 @@ const $orderDetail = document.querySelector(".order-detail");
 const $newOrderBtn = document.querySelector(".new-order-btn");
 
 let arrayBasketPizza = [];
+let currentOrder = [];
 
 // Crée les éléments visuels des pizzas à partir des données
 function createPizza(data) {
@@ -203,6 +204,10 @@ $confirmOrderBtn.addEventListener("click", () => {
   if (arrayBasketPizza.length > 0) {
     $orderModalWrapper.classList.remove("hidden");
 
+    createOrder();
+
+    fetchOrder();
+
     calculateTotalOrderPrice();
 
     displayOrderDetails();
@@ -339,6 +344,45 @@ async function fetchPizza() {
   );
   const data = await response.json();
   createPizza(data);
+}
+
+// Créer une commande dans l'API
+async function createOrder() {
+  const response = await fetch(
+    "https://prime-garfish-currently.ngrok-free.app/orders",
+    {
+      method: "POST",
+      headers: {
+        "ngrok-skip-browser-warning": "1",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${TOKEN}`,
+      },
+      body: JSON.stringify({
+        products: arrayBasketPizza,
+      }),
+    }
+  );
+
+  const data = await response.json();
+
+  console.log(data);
+}
+
+// Récupère les données de la commande depuis l'API
+async function fetchOrder() {
+  const response = await fetch(
+    "https://prime-garfish-currently.ngrok-free.app/orders",
+    {
+      method: "GET",
+      headers: {
+        "ngrok-skip-browser-warning": "1",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    }
+  );
+  const data = await response.json();
+  console.log(data);
 }
 
 fetchPizza();
