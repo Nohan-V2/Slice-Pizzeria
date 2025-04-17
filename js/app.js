@@ -148,24 +148,35 @@ function calculateTotalOrderPrice() {
   $totalOrderPrice.textContent = totalPrice + "€";
 }
 
+function calculateTotalOrderPriceDetails(data) {
+  let totalPrice = 0;
+
+  for (let i = 0; i < data.products.length; i++) {
+    const item = data.products[i];
+    totalPrice += item.product.price * item.quantity;
+  }
+
+  $totalOrderPrice.textContent = totalPrice + "€";
+}
+
 // Affiche les détails de la commande dans la modale
-function displayOrderDetails() {
+function displayOrderDetails(data) {
   $orderDetail.innerHTML = "";
 
-  arrayBasketPizza.forEach((pizza) => {
+  data.products.forEach((pizza) => {
     const $orderDetailProductItem = document.createElement("li");
     $orderDetailProductItem.classList.add("order-detail-product-item");
     $orderDetail.appendChild($orderDetailProductItem);
 
     const $orderDetailProductImage = document.createElement("img");
     $orderDetailProductImage.classList.add("order-detail-product-image");
-    $orderDetailProductImage.src = pizza.image;
-    $orderDetailProductImage.alt = pizza.description;
+    $orderDetailProductImage.src = pizza.product.image;
+    $orderDetailProductImage.alt = pizza.product.description;
     $orderDetailProductItem.appendChild($orderDetailProductImage);
 
     const $orderDetailProductName = document.createElement("span");
     $orderDetailProductName.classList.add("order-detail-product-name");
-    $orderDetailProductName.textContent = pizza.name;
+    $orderDetailProductName.textContent = pizza.product.name;
     $orderDetailProductItem.appendChild($orderDetailProductName);
 
     const $orderDetailProductQuantity = document.createElement("span");
@@ -177,7 +188,7 @@ function displayOrderDetails() {
     $orderDetailProductUnitPrice.classList.add(
       "order-detail-product-unit-price"
     );
-    $orderDetailProductUnitPrice.textContent = pizza.price + "€";
+    $orderDetailProductUnitPrice.textContent = "@ " + pizza.product.price + "€";
     $orderDetailProductItem.appendChild($orderDetailProductUnitPrice);
 
     const $orderDetailProductTotalPrice = document.createElement("span");
@@ -185,7 +196,7 @@ function displayOrderDetails() {
       "order-detail-product-total-price"
     );
     $orderDetailProductTotalPrice.textContent =
-      pizza.price * pizza.quantity + "€";
+      pizza.product.price * pizza.quantity + "€";
     $orderDetailProductItem.appendChild($orderDetailProductTotalPrice);
   });
 
@@ -203,13 +214,11 @@ $confirmOrderBtn.addEventListener("click", async () => {
   if (arrayBasketPizza.length > 0) {
     $orderModalWrapper.classList.remove("hidden");
 
-    await createOrder();
+    const orderData = await createOrder();
 
-    await fetchOrder();
+    calculateTotalOrderPriceDetails(orderData);
 
-    calculateTotalOrderPrice();
-
-    displayOrderDetails();
+    displayOrderDetails(orderData);
   } else {
     alert(
       "Votre panier est vide. Ajoutez des pizzas avant de confirmer la commande."
@@ -277,7 +286,7 @@ function updateBasketDisplay() {
     $basketProductDetailsUnitPrice.classList.add(
       "basket-product-details-unit-price"
     );
-    $basketProductDetailsUnitPrice.textContent = pizza.price + "€";
+    $basketProductDetailsUnitPrice.textContent = "@ " + pizza.price + "€";
     $basketProductDetails.appendChild($basketProductDetailsUnitPrice);
 
     const $basketProductDetailstotalPrice = document.createElement("span");
@@ -359,28 +368,19 @@ async function createOrder() {
         Authorization: `Bearer ${TOKEN}`,
       },
       body: JSON.stringify({
-        products: arrayBasketPizza,
+        products: arrayBasketPizza.map((pizza) => ({
+          uuid: pizza.id,
+          quantity: pizza.quantity,
+        })),
       }),
     }
   );
 
   const data = await response.json();
-}
 
-async function fetchOrder() {
-  const response = await fetch(
-    "https://prime-garfish-currently.ngrok-free.app/orders",
-    {
-      method: "GET",
-      headers: {
-        "ngrok-skip-browser-warning": "1",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${TOKEN}`,
-      },
-    }
-  );
-  const data = await response.json();
   console.log(data);
+
+  return data;
 }
 
 fetchPizza();

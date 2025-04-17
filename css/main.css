@@ -1,3 +1,9 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   --beaver: #87635a;
   --black: #000;
@@ -77,6 +83,7 @@ body {
   background-color: var(--tia-maria);
   border-radius: 24px;
   border: 1px solid var(--tia-maria);
+  color: var(--white);
   cursor: pointer;
   display: flex;
   justify-content: space-between;
