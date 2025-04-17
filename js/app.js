@@ -9,7 +9,6 @@ const $orderDetail = document.querySelector(".order-detail");
 const $newOrderBtn = document.querySelector(".new-order-btn");
 
 let arrayBasketPizza = [];
-let currentOrder = [];
 
 // Crée les éléments visuels des pizzas à partir des données
 function createPizza(data) {
@@ -161,7 +160,7 @@ function displayOrderDetails() {
     const $orderDetailProductImage = document.createElement("img");
     $orderDetailProductImage.classList.add("order-detail-product-image");
     $orderDetailProductImage.src = pizza.image;
-    $orderDetailProductImage.alt = pizza.name;
+    $orderDetailProductImage.alt = pizza.description;
     $orderDetailProductItem.appendChild($orderDetailProductImage);
 
     const $orderDetailProductName = document.createElement("span");
@@ -200,13 +199,13 @@ function displayOrderDetails() {
 }
 
 // Ajout d'un événement pour le bouton de confirmation de commande
-$confirmOrderBtn.addEventListener("click", () => {
+$confirmOrderBtn.addEventListener("click", async () => {
   if (arrayBasketPizza.length > 0) {
     $orderModalWrapper.classList.remove("hidden");
 
-    createOrder();
+    await createOrder();
 
-    fetchOrder();
+    await fetchOrder();
 
     calculateTotalOrderPrice();
 
@@ -228,9 +227,11 @@ $newOrderBtn.addEventListener("click", () => {
 
   $orderDetail.innerHTML = "";
 
-  $totalOrderPrice.textContent = "0.00€";
+  $totalOrderPrice.textContent = "0€";
 
   $orderModalWrapper.classList.add("hidden");
+
+  $emptyBasket.classList.remove("hidden");
 
   document.querySelectorAll(".add-to-cart-btn").forEach(($pizzaBtn) => {
     $pizzaBtn.classList.remove("hidden");
@@ -364,11 +365,8 @@ async function createOrder() {
   );
 
   const data = await response.json();
-
-  console.log(data);
 }
 
-// Récupère les données de la commande depuis l'API
 async function fetchOrder() {
   const response = await fetch(
     "https://prime-garfish-currently.ngrok-free.app/orders",
